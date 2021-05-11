@@ -1,7 +1,8 @@
 import cv2 
 import numpy as np 
 import argparse 
-
+import os
+from time import sleep
 # Defining the color ranges to be filtered.
 # The following ranges should be used on HSV domain image.
 low_apple_red = (160.0, 153.0, 153.0)
@@ -9,8 +10,11 @@ high_apple_red = (180.0, 255.0, 255.0)
 low_apple_raw = (0.0, 150.0, 150.0)
 high_apple_raw = (15.0, 255.0, 255.0)
 
+os.system('fswebcam -r 640x480 --no-banner image.jpg')
+sleep(2)
+resim = cv2.imread('image.jpg')
 ap = argparse.ArgumentParser()
-ap.add_argument("-i","--image", required=True, help="Path to input image")
+ap.add_argument("-i","--image", required=True, help="image.jpg")
 args = vars(ap.parse_args())
 
 image_bgr = cv2.imread(args['image'])

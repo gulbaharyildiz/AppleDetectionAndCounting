@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+import os
+from time import sleep
 def auto_canny(image, sigma=0.33):
 	# compute the median of the single channel pixel intensities
 	v = np.median(image)
@@ -9,7 +11,9 @@ def auto_canny(image, sigma=0.33):
 	edged = cv2.Canny(image, lower, upper)
 	# return the edged image
 	return edged
-image = cv2.imread('apples.jpg')
+os.system('fswebcam -r 640x480 --no-banner image.jpg')
+sleep(2)
+image = cv2.imread('image.jpg')
 image_d = image.copy()
 img_blur = cv2.GaussianBlur(image, (5,5), 0)
 img_ms = cv2.pyrMeanShiftFiltering(img_blur, 10, 90)
